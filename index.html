@@ -98,7 +98,7 @@ section{padding:40px 0}
 .offer__sub{font-size:12px;color:var(--muted)}
 .offer__save{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--ok);border-radius:6px;padding:2px 8px;margin-top:4px}
 .offer__prices{text-align:right}
-.offer__img{width:58px;height:58px;border-radius:10px;object-fit:cover;flex:none;background:#141414}
+.offer__img{width:58px;height:58px;border-radius:10px;object-fit:cover;flex:none;background:var(--brand-soft)}
 @media (max-width:360px){.offer__img{width:46px;height:46px}}
 .offer__prices b{display:block;font-size:16px}
 .offer__prices s{font-size:13px;color:#9a97a3}
@@ -114,6 +114,7 @@ section{padding:40px 0}
 .field .err{display:none;color:#c0233b;font-size:12px;margin-top:3px}
 .field.invalid .err{display:block}
 .field.invalid input,.field.invalid select{border-color:#c0233b}
+.field.valid input,.field.valid select{border-color:var(--brand)}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:6px 0 14px}
 .check input{margin-top:3px;accent-color:var(--brand);width:18px;height:18px;flex:none}
 .cta{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-size:17px;font-weight:800;color:#fff;background:var(--cta);border-radius:10px;padding:16px 12px;text-transform:uppercase;letter-spacing:.3px;animation:shake 4s ease-in-out infinite}
@@ -812,20 +813,35 @@ const cityValue = () => $("fCity").value === OTHER_CITY ? $("fCityOther").value.
 $("fDept").addEventListener("change", fillCities);
 $("fCity").addEventListener("change", toggleOtherCity);
 
+const rules = {
+  fName: v => v.trim().length >= 3,
+  fPhone: v => !!localPhone(v),
+  fDept: v => !!v, fCity: () => cityValue().length >= 2, fAddr: v => v.trim().length >= 4
+};
 function validate() {
   let ok = true;
-  const rules = {
-    fName: v => v.trim().length >= 3,
-    fPhone: v => !!localPhone(v),
-    fDept: v => !!v, fCity: () => cityValue().length >= 2, fAddr: v => v.trim().length >= 4
-  };
   for (const [id, fn] of Object.entries(rules)) {
     const f = $(id).closest(".field"), good = fn($(id).value);
     f.classList.toggle("invalid", !good);
+    f.classList.toggle("valid", good);
     if (!good && ok) { $(id).focus(); ok = false; }
   }
   return ok;
 }
+// El rojo solo aparece al enviar con un dato faltante, y se va apenas la persona lo corrige.
+// Mientras escribe nunca se marca en rojo; al salir del campo, si quedó bien, se marca en verde.
+function recheck(id) {
+  const f = $(id).closest(".field"), good = rules[id]($(id).value);
+  if (good) { f.classList.remove("invalid"); f.classList.add("valid"); }
+  else f.classList.remove("valid");
+}
+for (const id of Object.keys(rules)) {
+  $(id).addEventListener("input", () => { if ($(id).closest(".field").classList.contains("invalid")) recheck(id); });
+  $(id).addEventListener("change", () => recheck(id));
+  $(id).addEventListener("blur", () => { if ($(id).value.trim()) recheck(id); });
+}
+$("fCityOther") && $("fCityOther").addEventListener("input", () => recheck("fCity"));
+$("fDept").addEventListener("change", () => recheck("fCity"));
 
 /* --- Mapa de entrega (Leaflet + OpenStreetMap, se carga al abrir el checkout) --- */
 // url solo se llena con una ubicación confirmada (GPS, toque, arrastre o "Sí, es acá"):
