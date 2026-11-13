@@ -16,7 +16,7 @@ Archivos del servidor en `supabase/`:
 - `migrations/20261112180000_landing_magnesio_vee_origin.sql`: agrega `landing_magnesio_vee` a `private.validate_order_creation_mode` (sin esto el panel rechaza el pedido) y a `private.queue_new_order_meta_purchase` (Purchase por CAPI).
 - En `meta-purchase-worker` se sumó `landing_magnesio_vee: { id: 'MAGNESIO-VEE-90', name: 'Magnesio + B6 VEE - 90 cápsulas', sourceUrl: 'https://zenvit.github.io/magnesio-vee-b6/' }` al mapa `PRODUCTS`.
 
-Estado (12/11/2026): las tres cosas están aplicadas en PROD (función v1, migración y worker v27).
+Estado (12/11/2026): las tres cosas están aplicadas en PROD (función v1, migración y worker v28). Publicada en https://zenvit.github.io/magnesio-vee-b6/
 
 ## Meta y visitas
 Pixel VENTA CAPI: PageView, ViewContent, InitiateCheckout, Contact y Purchase con eventID `<pedido>:purchase`. `zv-visitas.js` alimenta la Vista en tiempo real del panel (`data-landing="landing_magnesio_vee"`).
