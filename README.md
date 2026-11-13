@@ -14,7 +14,7 @@ El formulario envía el pedido a la edge function `create-magnesio-vee-order` (S
 Archivos del servidor en `supabase/`:
 - `functions/create-magnesio-vee-order/index.ts`: copia de `create-articumina-order` con producto, origen y precios de Magnesio VEE. Se despliega con `verify_jwt = false`.
 - `migrations/20261112180000_landing_magnesio_vee_origin.sql`: agrega `landing_magnesio_vee` a `private.validate_order_creation_mode` (sin esto el panel rechaza el pedido) y a `private.queue_new_order_meta_purchase` (Purchase por CAPI).
-- En `meta-purchase-worker` se sumó `landing_magnesio_vee: { id: 'MAGNESIO-VEE-90', name: 'Magnesio + B6 VEE - 90 cápsulas', sourceUrl: 'https://zenvit.github.io/magnesio-vee/' }` al mapa `PRODUCTS`.
+- En `meta-purchase-worker` se sumó `landing_magnesio_vee: { id: 'MAGNESIO-VEE-90', name: 'Magnesio + B6 VEE - 90 cápsulas', sourceUrl: 'https://zenvit.github.io/magnesio-vee-b6/' }` al mapa `PRODUCTS`.
 
 Estado (12/11/2026): las tres cosas están aplicadas en PROD (función v1, migración y worker v27).
 
@@ -28,4 +28,4 @@ Los datos salen de la etiqueta (ver `Anuncios/Magnesio VEE/analisis.md`): 90 cá
 `img/` tiene las 8 piezas de `Anuncios/Magnesio VEE` en WebP (1080 y 560 px) y las fotos reales del frasco (frente, tabla y advertencias) en 1080×1350. `combo-1/2/3.webp` se armaron con la foto real del frasco. Todo suma unos 1,4 MB.
 
 ## Desarrollo y publicación
-Sin dependencias: `python -m http.server 4173` en esta carpeta. Todo lo del producto está en `CONFIG` dentro de `index.html`. Pensada para GitHub Pages (repo `ZenVit/magnesio-vee`, rama `main`, raíz `/`).
+Sin dependencias: `python -m http.server 4173` en esta carpeta. Todo lo del producto está en `CONFIG` dentro de `index.html`. Pensada para GitHub Pages (repo `ZenVit/magnesio-vee-b6`, rama `main`, raíz `/`).
