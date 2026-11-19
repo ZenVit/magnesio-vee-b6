@@ -6,7 +6,7 @@
 const PRODUCT_NAME = "MAGNESIO VEE";
 const ORIGIN = "landing_magnesio_vee";
 // Precio TOTAL por combo.
-const BUNDLES: Record<number, number> = { 1: 195000, 2: 295000, 3: 395000 };
+const BUNDLES: Record<number, number> = { 1: 169000, 2: 289000, 3: 399000 };
 const DEPARTMENTS = ["Asunción", "Central"];
 // Descuento de la ventana "antes de irte" de la landing. El monto lo fija el servidor:
 // el navegador solo avisa que la persona lo aceptó (descuento: "salida").

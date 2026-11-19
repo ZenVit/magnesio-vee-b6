@@ -65,7 +65,11 @@ section{padding:40px 0}
 .gallery__badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px}
 .badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;color:#fff;background:var(--brand)}
 .badge.dark{background:#2e2a39}
-.gallery__thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+.gallery__nav{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,12px);margin-top:10px}
+.gallery__arrow{display:grid;place-items:center;flex:none;width:40px;height:40px;border:1px solid var(--brand);border-radius:50%;background:#eef7f1;color:var(--brand);font:inherit;font-size:25px;line-height:1;cursor:pointer}
+.gallery__arrow:hover{background:var(--brand);color:#fff}
+.gallery__thumbs{display:flex;gap:5px;min-width:0}
+.gallery__thumbs button{width:54px;min-width:0}
 .gallery__thumbs button{border:2px solid transparent;border-radius:8px;overflow:hidden;padding:0;background:none;cursor:pointer}
 .gallery__thumbs button[aria-current="true"]{border-color:var(--brand)}
 .gallery__thumbs img,.gallery__thumbs .ph{aspect-ratio:var(--gallery-ratio);object-fit:cover;font-size:0}
@@ -76,15 +80,6 @@ section{padding:40px 0}
 .title{font-size:clamp(24px,5.5vw,32px);font-weight:700;line-height:1.2}
 .proof{display:flex;align-items:center;gap:8px;margin:8px 0 14px;font-size:14px;color:var(--muted)}
 .stars{color:var(--star);letter-spacing:1px}
-.chips{display:grid;gap:8px;margin-bottom:16px}
-.chip{display:flex;gap:12px;align-items:center;background:#eef7f1;border-radius:10px;padding:10px 12px}
-.chip__ico{font-size:22px;width:32px;text-align:center}
-.chip b{display:block;font-size:14px}
-.chip span{font-size:13px;color:var(--muted)}
-.price{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px}
-.price__now{font-size:28px;font-weight:800;color:var(--brand)}
-.price__old{font-size:17px;color:#9a97a3;text-decoration:line-through}
-.price__save{background:#2e2a39;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
 .countdown{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#2e2a39;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:13px;font-weight:600}
 .countdown__time{font-variant-numeric:tabular-nums;font-size:20px;font-weight:800;letter-spacing:1px}
 
@@ -129,7 +124,25 @@ section{padding:40px 0}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ---------- Checkout (ventana) ---------- */
-.buy{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.buy{border:1px solid var(--line);border-radius:14px;padding:clamp(10px,2.5vw,16px);background:#fff}
+.buy__label{color:var(--brand);font-size:13px;font-weight:800;letter-spacing:.06em;margin:0 0 14px}
+.buy .offers{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.buy .offer{flex-direction:column;justify-content:center;gap:2px;text-align:center;min-height:94px;padding:12px 3px}
+.buy .offer input{position:absolute;width:1px;height:1px;opacity:0}
+.buy .offer:focus-within{outline:2px solid var(--brand);outline-offset:2px}
+.buy .offer__title{font-size:clamp(11px,2.8vw,13px)}
+.buy .offer__prices b{font-size:clamp(12px,3.4vw,15px);white-space:nowrap;text-align:center;color:var(--brand)}
+.buy .offer__sub{font-size:clamp(9px,2.5vw,11px)}
+.buy .offer__tag{top:-9px;right:auto;left:50%;transform:translateX(-50%);padding:2px 5px;font-size:clamp(7px,1.9vw,9px);white-space:nowrap}
+.buy .offer[data-checked="true"]::after{content:"✓";position:absolute;top:4px;right:4px;display:grid;place-items:center;border-radius:50%;width:15px;height:15px;background:var(--brand);color:white;font-size:10px}
+.buy .offer__exit{font-size:9px}
+.buy .cta{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:12px 16px;animation:none}
+.buy .cta__main{display:block;font-size:clamp(17px,4.5vw,20px)}
+.buy .cta__sub{display:block;font-size:13px;font-weight:600;text-transform:none;letter-spacing:normal}
+.buy .cta__arrow{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;background:#126034;font-size:20px}
+.buy__wa{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--brand);border-radius:999px;margin-top:10px;padding:11px 12px;color:var(--brand);font-weight:700;text-decoration:none}
+.buy__wa:hover{background:#eef7f1}
+.buy__wa svg{width:19px;height:19px}
 .buy .cta{margin-top:14px}
 .checkout{border:0;padding:0;margin:auto;width:min(520px,100%);max-height:100dvh;border-radius:16px;background:#fff;color:var(--text);box-shadow:0 20px 60px rgba(0,0,0,.25)}
 .checkout::backdrop{background:rgba(20,16,14,.6)}
@@ -215,19 +228,10 @@ section{padding:40px 0}
 .banner img{width:100%;height:auto}
 .banner__note{padding:8px 16px;text-align:center;color:var(--ok);font-weight:700}
 
-/* ---------- Dolores ---------- */
-.pain__kicker{display:block;text-align:center;font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--brand);margin-bottom:6px}
-.pain h2{font-weight:900;font-size:clamp(20px,5vw,28px)}
-.pain__list{display:grid;gap:12px;margin-top:22px;max-width:640px;margin-inline:auto}
-@media (min-width:768px){.pain__list{grid-template-columns:repeat(3,1fr);max-width:none}}
-.pain__item{display:flex;gap:12px;align-items:center;background:#eef7f1;border-left:4px solid var(--brand);border-radius:10px;padding:16px}
-.pain__item i{font-style:normal;font-size:26px}
-.pain__item p{font-weight:600;font-size:14px}
-
 /* ---------- Pestañas ---------- */
-.tabs__bar{display:flex;gap:8px;overflow-x:auto;margin:20px 0 18px;padding-bottom:4px;justify-content:flex-start}
-@media (min-width:768px){.tabs__bar{justify-content:center}}
-.tabs__bar button{flex:none;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--brand-soft);background:#fff;color:var(--text);padding:9px 14px;border-radius:999px;cursor:pointer}
+.product-info{padding-top:24px}
+.tabs__bar{display:flex;gap:clamp(4px,1.5vw,8px);margin:20px 0 18px;justify-content:center}
+.tabs__bar button{flex:0 1 auto;min-width:0;font:inherit;font-size:clamp(11px,3.15vw,13px);line-height:1.2;font-weight:600;border:1px solid var(--brand-soft);background:#fff;color:var(--text);padding:9px clamp(6px,2vw,14px);min-height:40px;border-radius:999px;cursor:pointer}
 .tabs__bar button[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
 .tabs__panel{max-width:720px;margin:0 auto;text-align:center}
 .tabs__panel h3{font-size:18px;margin-bottom:14px}
@@ -326,7 +330,7 @@ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createEl
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '2141006803281667');
 fbq('track', 'PageView');
-fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'product', value: 195000, currency: 'PYG' });
+fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'product', value: 169000, currency: 'PYG' });
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2141006803281667&ev=PageView&noscript=1"></noscript>
 </head>
@@ -342,29 +346,30 @@ fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'produ
       <div class="gallery__main" id="galleryMain">
         <div class="gallery__badges" id="badges"></div>
       </div>
-      <div class="gallery__thumbs" id="thumbs"></div>
+      <div class="gallery__nav" role="group" aria-label="Fotos del producto">
+        <button class="gallery__arrow" id="galleryPrev" type="button" aria-label="Foto anterior">‹</button>
+        <div class="gallery__thumbs" id="thumbs"></div>
+        <button class="gallery__arrow" id="galleryNext" type="button" aria-label="Foto siguiente">›</button>
+      </div>
     </div>
 
     <div>
       <div class="viewers" id="viewers"><span class="dot"></span><span><b id="viewersN">12</b> personas viendo este producto</span></div>
       <h1 class="title" id="pTitle"></h1>
       <div class="proof"><span class="stars" id="pStars">★★★★★</span><span id="pProof"></span></div>
-      <div class="chips" id="chips"></div>
-
-      <div class="price">
-        <span class="price__now" id="priceNow"></span>
-        <span class="price__old" id="priceOld"></span>
-        <span class="price__save" id="priceSave"></span>
-      </div>
-
       <div class="countdown" id="countdown">
         <span>⏳ LA OFERTA TERMINA EN</span>
         <span class="countdown__time" id="cdTime">--:--</span>
       </div>
 
       <div class="buy" id="buyBox">
-        <div class="offers" id="offers" role="radiogroup" aria-label="Elegí tu oferta"></div>
-        <button class="cta" id="buyBtn" type="button">Comprar ahora – pago al recibir</button>
+        <h2 class="buy__label" id="comboHeading">ELEGÍ TU COMBO</h2>
+        <div class="offers" id="offers" role="radiogroup" aria-labelledby="comboHeading"></div>
+        <button class="cta" id="buyBtn" type="button">
+          <span><span class="cta__main">Comprar ahora</span><span class="cta__sub" id="buyTotal"></span></span>
+          <span class="cta__arrow" aria-hidden="true">→</span>
+        </button>
+        <a class="buy__wa" id="buyWhatsApp" href="https://wa.me/595972738779" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2a13.1 13.1 0 0 0 6.6 1.8c7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.8C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg><span>Pedir por WhatsApp</span></a>
         <div class="trust"><span>🚚 Envío gratis a todo el país</span><span>💵 Pagás al recibir</span><span>🔒 Compra segura</span></div>
       </div>
 
@@ -462,21 +467,12 @@ fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'produ
   <button class="ghost" type="button" id="exitNo">No, gracias</button>
 </dialog>
 
-<div class="divider"></div>
-<!-- 3. Banner de imágenes #1 -->
-<div class="banner">
-  <button type="button" data-banner-order>
-    <img src="img/mvee-dos-frascos-1080.webp" srcset="img/mvee-dos-frascos-560.webp 560w, img/mvee-dos-frascos-1080.webp 1080w" sizes="(min-width: 560px) 560px, 100vw" width="1080" height="1350" alt="Magnesio + Vitamina B6 VEE: 2 frascos por Gs. 295.000, ahorrás Gs. 95.000 frente a comprarlos por separado. Abrir pedido." loading="lazy" decoding="async">
-  </button>
-</div>
-<div class="divider"></div>
-
-<!-- 4. Señales de alerta (dolores) -->
-<section class="pain">
+<!-- Información del producto -->
+<section class="product-info" aria-labelledby="tabsTitle">
   <div class="wrap">
-    <span class="pain__kicker" id="painKicker"></span>
-    <h2 id="painTitle"></h2>
-    <div class="pain__list" id="painList"></div>
+    <h2 id="tabsTitle"></h2>
+    <div class="tabs__bar" id="tabsBar" role="tablist" aria-labelledby="tabsTitle"></div>
+    <div class="tabs__panel" id="tabsPanel" role="tabpanel"></div>
   </div>
 </section>
 
@@ -508,15 +504,6 @@ fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'produ
   </button>
 </div>
 
-<!-- 6. Pestañas de contenido -->
-<section>
-  <div class="wrap">
-    <h2 id="tabsTitle"></h2>
-    <div class="tabs__bar" id="tabsBar" role="tablist"></div>
-    <div class="tabs__panel" id="tabsPanel" role="tabpanel"></div>
-  </div>
-</section>
-
 <!-- 7. Tabla comparativa -->
 <section class="on-brand">
   <div class="wrap">
@@ -544,7 +531,7 @@ fbq('track', 'ViewContent', { content_name: 'Magnesio VEE', content_type: 'produ
 <div class="banner">
   <p class="banner__note" id="bannerPriceNote" hidden>La imagen muestra los precios de lista. Tu descuento se aplica en el pedido.</p>
   <button type="button" id="comboBanner" data-banner-order>
-    <img src="img/mvee-tres-frascos-1080.webp" srcset="img/mvee-tres-frascos-560.webp 560w, img/mvee-tres-frascos-1080.webp 1080w" sizes="(min-width: 560px) 560px, 100vw" width="1080" height="1350" alt="Magnesio + Vitamina B6 VEE: 3 frascos por Gs. 395.000, ahorrás Gs. 190.000 frente a comprarlos por separado. Abrir pedido." loading="lazy" decoding="async">
+    <img src="img/mvee-tres-frascos-1080.webp" srcset="img/mvee-tres-frascos-560.webp 560w, img/mvee-tres-frascos-1080.webp 1080w" sizes="(min-width: 560px) 560px, 100vw" width="1080" height="1350" alt="Magnesio + Vitamina B6 VEE: 3 frascos por Gs. 399.000, ahorrás Gs. 108.000 frente a comprarlos por separado. Abrir pedido." loading="lazy" decoding="async">
   </button>
 </div>
 <div class="divider on-brand"></div>
@@ -586,22 +573,19 @@ const CONFIG = {
   currency: { prefix: "Gs. ", locale: "es-PY" },
 
   product: {
-    name: "Magnesio + Vitamina B6 VEE – Bisglicinato de magnesio, 90 cápsulas",
+    name: "Magnesio + Vitamina B6 VEE – Bisglicinato de magnesio",
     proof: "Suplemento alimentario en cápsulas · 90 cápsulas · 30 días",
     badges: [],   // las fotos ya traen texto
-    images: ["img/mvee-un-frasco-1080.webp", "img/producto-frente.webp", "img/mvee-composicion-1080.webp", "img/producto-tabla.webp"],
-    chips: [
-      { icon: "⚡", title: "350 mg de magnesio por porción", text: "Con 1,7 mg de vitamina B6 en la misma toma" },
-      { icon: "🌿", title: "Bisglicinato de magnesio", text: "Es la fuente de magnesio que declara la etiqueta" },
-      { icon: "💊", title: "90 cápsulas", text: "3 al día: un frasco dura 30 días" }
-    ]
+    coverAlt: "Magnesio + Vitamina B6 VEE. Por porción de 3 cápsulas: 350 mg de magnesio y 1,7 mg de vitamina B6. 90 cápsulas para 30 días. 1 frasco por Gs. 169.000.",
+    coverThumbnail: "img/mvee-un-frasco-560.webp",
+    images: ["img/mvee-un-frasco-1080.webp", "img/producto-frente.webp", "img/mvee-composicion-1080.webp", "img/producto-tabla.webp"]
   },
 
   /* Precios del catálogo. compare = el mismo frasco comprado suelto (ahorro real del combo). */
   offers: [
-    { id: "1u", title: "1 frasco · 90 cápsulas",   sub: "Rinde 30 días", img: "img/combo-1.webp", qty: 1, price: 195000, default: true },
-    { id: "2u", title: "2 frascos · 180 cápsulas", sub: "Rinde 60 días", img: "img/combo-2.webp", qty: 2, price: 295000, compare: 390000, tag: "⭐ EL MÁS ELEGIDO" },
-    { id: "3u", title: "3 frascos · 270 cápsulas", sub: "Rinde 90 días", img: "img/combo-3.webp", qty: 3, price: 395000, compare: 585000, tag: "🔥 MEJOR PRECIO" }
+    { id: "1u", title: "1 frasco · 90 cápsulas",   sub: "Rinde 30 días", img: "img/combo-1.webp", qty: 1, price: 169000, default: true },
+    { id: "2u", title: "2 frascos · 180 cápsulas", sub: "Rinde 60 días", img: "img/combo-2.webp", qty: 2, price: 289000, compare: 338000, tag: "MÁS ELEGIDO" },
+    { id: "3u", title: "3 frascos · 270 cápsulas", sub: "Rinde 90 días", img: "img/combo-3.webp", qty: 3, price: 399000, compare: 507000, tag: "MÁXIMO AHORRO" }
   ],
 
   countdownMinutes: 0,   // sin contador: no hay una oferta que venza
@@ -637,28 +621,18 @@ const CONFIG = {
   tickerTop: ["🚚 ENVÍO GRATIS A TODO EL PAÍS","💵 PAGÁS AL RECIBIR","📦 COMBOS DESDE 2 FRASCOS","💬 ATENCIÓN POR WHATSAPP"],
   tickerBottom: ["⚡ 350 MG DE MAGNESIO POR PORCIÓN","💊 VITAMINA B6","🌿 BISGLICINATO DE MAGNESIO","🚫 SIN AZÚCAR","🌾 SIN GLUTEN","🥛 SIN LACTOSA","🧬 SIN TRANSGÉNICOS"],
 
-  pain: {
-    kicker: "🌿 MAGNESIO PARA TU DÍA A DÍA",
-    title: "¿Querés sumar magnesio a tu rutina?",
-    items: [
-      { icon: "🏃", text: "Para acompañar tu día activo: trabajo, casa y movimiento" },
-      { icon: "🥗", text: "Como complemento de una alimentación variada" },
-      { icon: "⏱️", text: "Simple: 3 cápsulas al día y listo" }
-    ]
-  },
-
   tabs: {
     title: "🌿 ¿Qué trae el Magnesio + B6 VEE?",
     items: [
-      { label: "🧪 Composición", heading: "Lo que aporta una porción (3 cápsulas)",
-        list: ["350 mg de magnesio","1,7 mg de vitamina B6","Fuente de magnesio: bisglicinato de magnesio","Sin azúcar, sin gluten, sin lactosa y sin transgénicos"],
-        text: "Suplemento alimentario en cápsulas. Contiene gelatina y colorantes artificiales." },
+      { label: "💊 Cómo se toma", heading: "Cómo tomar Magnesio + B6 VEE",
+        list: ["💊 3 cápsulas al día","📦 90 cápsulas por frasco","📅 Un frasco dura 30 días"],
+        text: "Para mayores de 19 años. No deben consumirlo embarazadas, mujeres en lactancia ni niños. Si tomás medicación, consultá a tu médico." },
       { label: "⚡ Para qué sirve", heading: "Qué hace el magnesio en el cuerpo",
         list: ["Contribuye al funcionamiento neuromuscular","Contribuye a la formación de huesos y dientes","Contribuye al proceso de división celular"],
         text: "Son las funciones del magnesio que indica el envase. Complementa una alimentación equilibrada." },
-      { label: "💊 Cómo se toma", heading: "Simple de sumar a tu rutina",
-        list: ["📦 90 cápsulas por frasco","💊 3 cápsulas al día","📅 Un frasco dura 30 días","🚚 Te llega a tu casa y pagás al recibir"],
-        text: "Para mayores de 19 años. No deben consumirlo embarazadas, mujeres en lactancia ni niños. Si tomás medicación, consultá a tu médico." }
+      { label: "🧪 Composición", heading: "Lo que aporta una porción (3 cápsulas)",
+        list: ["350 mg de magnesio","1,7 mg de vitamina B6","Fuente de magnesio: bisglicinato de magnesio","Sin azúcar, sin gluten, sin lactosa y sin transgénicos"],
+        text: "Suplemento alimentario en cápsulas. Contiene gelatina y colorantes artificiales." }
     ]
   },
 
@@ -713,18 +687,21 @@ document.title = P.name;
 $("pTitle").textContent = P.name;
 $("pProof").textContent = P.proof;
 $("badges").innerHTML = P.badges.map(b => `<span class="badge ${b.dark ? "dark" : ""}">${esc(b.text)}</span>`).join("");
-$("chips").innerHTML = P.chips.map(c => `<div class="chip"><span class="chip__ico">${c.icon}</span><div><b>${esc(c.title)}</b><span>${esc(c.text)}</span></div></div>`).join("");
 
 let current = 0;
 function showImage(i) {
   current = i;
   const main = $("galleryMain");
   main.querySelectorAll("img,.ph").forEach(n => n.remove());
-  main.insertAdjacentHTML("afterbegin", img(P.images[i], P.name, `Foto ${i + 1} · 1080×1350`).replace('loading="lazy"', i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'));
+  main.insertAdjacentHTML("afterbegin", img(P.images[i], i === 0 ? P.coverAlt : P.name, `Foto ${i + 1} · 1080×1350`).replace('loading="lazy"', i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'));
   [...$("thumbs").children].forEach((b, j) => b.setAttribute("aria-current", j === i));
 }
-$("thumbs").style.gridTemplateColumns = `repeat(${P.images.length}, 1fr)`;
-$("thumbs").innerHTML = P.images.map((s, i) => `<button type="button" aria-label="Ver foto ${i + 1}">${img(s, "", "")}</button>`).join("");
+function stepImage(step) {
+  showImage((current + step + P.images.length) % P.images.length);
+}
+$("galleryPrev").addEventListener("click", () => stepImage(-1));
+$("galleryNext").addEventListener("click", () => stepImage(1));
+$("thumbs").innerHTML = P.images.map((s, i) => `<button type="button" aria-label="Ver foto ${i + 1}">${img(i === 0 ? P.coverThumbnail : s, "", "")}</button>`).join("");
 [...$("thumbs").children].forEach((b, i) => b.addEventListener("click", () => showImage(i)));
 showImage(0);
 
@@ -734,7 +711,7 @@ $("galleryMain").addEventListener("touchstart", e => x0 = e.touches[0].clientX, 
 $("galleryMain").addEventListener("touchend", e => {
   if (x0 === null) return;
   const dx = e.changedTouches[0].clientX - x0; x0 = null;
-  if (Math.abs(dx) > 40) showImage((current + (dx < 0 ? 1 : -1) + P.images.length) % P.images.length);
+  if (Math.abs(dx) > 40) stepImage(dx < 0 ? 1 : -1);
 });
 
 if (CONFIG.viewers) {
@@ -752,25 +729,32 @@ const finalPrice = o => o.price - exitOff(o);
 // Las mismas ofertas se muestran en la ficha y dentro del checkout.
 function renderOffers() {
   ["offers", "offersModal"].forEach(box => {
+    const compact = box === "offers";
     $(box).innerHTML = CONFIG.offers.map(o => `
     <label class="offer" data-checked="${o.id === selected.id}">
       ${o.tag ? `<span class="offer__tag">${esc(o.tag)}</span>` : ""}
       <input type="radio" name="${box}" value="${o.id}" ${o.id === selected.id ? "checked" : ""}>
-      ${o.img ? `<img class="offer__img" src="${esc(o.img)}" alt="" loading="lazy">` : ""}
+      ${o.img && !compact ? `<img class="offer__img" src="${esc(o.img)}" alt="" loading="lazy">` : ""}
+      ${compact ? `
+      <div class="offer__title">${o.qty} ${o.qty === 1 ? "frasco" : "frascos"}</div>
+      <div class="offer__prices"><b>${money(finalPrice(o))}</b></div>
+      <div class="offer__sub">${money(Math.round(finalPrice(o) / o.qty))} c/u</div>
+      ` : `
       <div class="offer__body"><div class="offer__title">${esc(o.title)}</div>${o.sub ? `<div class="offer__sub">${esc(o.sub)}</div>` : ""}${pct(o) ? `<span class="offer__save">Ahorrá ${pct(o)}%</span>` : ""}${exitOff(o) ? `<span class="offer__exit">🎁 Descuento especial – ${money(exitOff(o))}</span>` : ""}</div>
-      <div class="offer__prices"><b>${money(finalPrice(o))}</b>${o.compare || exitOff(o) ? `<s>${money(o.compare || o.price)}</s>` : ""}</div>
+      <div class="offer__prices"><b>${money(finalPrice(o))}</b>${o.compare || exitOff(o) ? `<s>${money(o.compare || o.price)}</s>` : ""}</div>`}
     </label>`).join("");
     $(box).querySelectorAll("input").forEach(inp => inp.addEventListener("change", () => {
-      selected = CONFIG.offers.find(o => o.id === inp.value); renderOffers(); updatePrice();
+      selected = CONFIG.offers.find(o => o.id === inp.value);
+      renderOffers();
+      $(box).querySelector("input:checked").focus({ preventScroll: true });
+      updatePrice();
     }));
   });
 }
 function updatePrice() {
-  $("priceNow").textContent = money(finalPrice(selected));
-  $("priceOld").textContent = selected.compare || exitOff(selected) ? money(selected.compare || selected.price) : "";
-  $("priceSave").textContent = pct(selected) ? `Ahorrá ${pct(selected)}%` : "";
-  $("priceSave").hidden = !pct(selected);
-  $("buyBtn").textContent = `Comprar ahora – ${money(finalPrice(selected))}`;
+  $("buyTotal").textContent = `${money(finalPrice(selected))} · Pagás al recibir`;
+  const message = `Hola, quiero pedir Magnesio + Vitamina B6 VEE. Combo: ${selected.title} por ${money(finalPrice(selected))}.`;
+  $("buyWhatsApp").href = `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent(message)}`;
   const subtotal = selected.compare || selected.price;
   $("sumImg").src = selected.img || P.images[0];
   $("sumOffer").textContent = selected.title;
@@ -1097,10 +1081,6 @@ document.querySelectorAll("[data-banner-order]").forEach(button => {
   button.addEventListener("click", openCheckout);
 });
 
-$("painKicker").textContent = CONFIG.pain.kicker;
-$("painTitle").textContent = CONFIG.pain.title;
-$("painList").innerHTML = CONFIG.pain.items.map(p => `<div class="pain__item"><i>${p.icon}</i><p>${esc(p.text)}</p></div>`).join("");
-
 $("tabsTitle").textContent = CONFIG.tabs.title;
 function showTab(i) {
   const t = CONFIG.tabs.items[i];
@@ -1156,7 +1136,11 @@ addEventListener("scroll", () => {
 }, { passive: true });
 $("toTop").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
 $("waFloat").href = `https://wa.me/${CONFIG.order.whatsapp}?text=${encodeURIComponent("Hola, estoy viendo el Magnesio + B6 VEE y tengo una consulta sobre los combos y el envío")}`;
-$("waFloat").addEventListener("click", () => { if (window.fbq) fbq("track", "Contact", { content_name: "Magnesio VEE" }); });
+[$("waFloat"), $("buyWhatsApp")].forEach(link => {
+  link.addEventListener("click", () => {
+    if (window.fbq) fbq("track", "Contact", { content_name: "Magnesio VEE" });
+  });
+});
 // En pantallas angostas, la placa de combos ocupa todo el ancho.
 new IntersectionObserver(([entry]) => {
   $("waFloat").classList.toggle("over-offer", entry.isIntersecting);

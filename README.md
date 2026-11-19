@@ -3,9 +3,9 @@
 Landing estática hecha con la misma plantilla que ZenVit/articumina: checkout en ventana, departamentos y ciudades de Paraguay, mapa opcional, combos, descuento "antes de irte", pago al recibir y botón de WhatsApp.
 
 ## Precios
-- 1 frasco: Gs. 195.000
-- 2 frascos: Gs. 295.000 (ahorro Gs. 95.000)
-- 3 frascos: Gs. 395.000 (ahorro Gs. 190.000)
+- 1 frasco: Gs. 169.000
+- 2 frascos: Gs. 289.000 (ahorro Gs. 49.000)
+- 3 frascos: Gs. 399.000 (ahorro Gs. 108.000)
 - Descuento "antes de irte": Gs. 10.000 (1 frasco) y Gs. 20.000 (combos), igual que Articumina.
 
 ## Pedidos
