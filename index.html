@@ -7,7 +7,7 @@
 <meta name="description" content="Magnesio + Vitamina B6 VEE: 90 cápsulas de bisglicinato de magnesio, 350 mg de magnesio por porción. Envío gratis a todo el país, pagás al recibir.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" imagesrcset="img/mvee-un-frasco-560.webp 560w, img/mvee-un-frasco-800.webp 800w, img/mvee-un-frasco-1080.webp 1080w" imagesizes="(min-width: 1100px) 533px, (min-width: 900px) 49vw, calc(100vw - 32px)" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="img/mvee-portada-560.webp 560w, img/mvee-portada-800.webp 800w, img/mvee-portada-1080.webp 1080w" imagesizes="(min-width: 1100px) 533px, (min-width: 900px) 49vw, calc(100vw - 32px)" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <!--
   PLANTILLA DE LANDING (estructura analizada de una página de referencia)
@@ -30,7 +30,7 @@
   --card:#ffffff;
   --line:#ececf1;
   --radius:12px;
-  --gallery-ratio:4/5;   /* 4/5 si tus fotos son verticales */
+  --gallery-ratio:3/4;
   --maxw:1100px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -61,7 +61,7 @@ section{padding:40px 0}
 .hero__grid{display:grid;gap:28px}
 @media (min-width:900px){.hero__grid{grid-template-columns:1.05fr 1fr;align-items:start}.gallery{position:sticky;top:16px}}
 .gallery__main{position:relative;border-radius:var(--radius);overflow:hidden;background:#faf7f9}
-.gallery__main img,.gallery__main .ph{aspect-ratio:var(--gallery-ratio);object-fit:cover;width:100%;height:auto}
+.gallery__main img,.gallery__main .ph{aspect-ratio:var(--gallery-ratio);object-fit:contain;width:100%;height:auto}
 .gallery__badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px}
 .badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;color:#fff;background:var(--brand)}
 .badge.dark{background:#2e2a39}
@@ -72,7 +72,7 @@ section{padding:40px 0}
 .gallery__thumbs button{width:54px;min-width:0}
 .gallery__thumbs button{border:2px solid transparent;border-radius:8px;overflow:hidden;padding:0;background:none;cursor:pointer}
 .gallery__thumbs button[aria-current="true"]{border-color:var(--brand)}
-.gallery__thumbs img,.gallery__thumbs .ph{aspect-ratio:var(--gallery-ratio);object-fit:cover;font-size:0}
+.gallery__thumbs img,.gallery__thumbs .ph{aspect-ratio:var(--gallery-ratio);object-fit:contain;width:100%;font-size:0}
 .viewers{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px}
 .viewers b{color:var(--text)}
 .dot{width:8px;height:8px;border-radius:50%;background:#e0245e;box-shadow:0 0 0 0 rgba(224,36,94,.6);animation:pulse 1.6s infinite}
@@ -561,11 +561,11 @@ const CONFIG = {
     name: "Magnesio + Vitamina B6 VEE – Bisglicinato de magnesio",
     proof: "Suplemento alimentario en cápsulas · 90 cápsulas · 30 días",
     badges: [],   // las fotos ya traen texto
-    coverAlt: "Magnesio + Vitamina B6 VEE. Por porción de 3 cápsulas: 350 mg de magnesio y 1,7 mg de vitamina B6. 90 cápsulas para 30 días. 1 frasco por Gs. 169.000.",
-    coverSrcset: "img/mvee-un-frasco-560.webp 560w, img/mvee-un-frasco-800.webp 800w, img/mvee-un-frasco-1080.webp 1080w",
+    coverAlt: "Magnesio + Vitamina B6 VEE. 1 frasco de 90 cápsulas por Gs. 169.000. Envío gratis y pago al recibir.",
+    coverSrcset: "img/mvee-portada-560.webp 560w, img/mvee-portada-800.webp 800w, img/mvee-portada-1080.webp 1080w",
     coverSizes: "(min-width: 1100px) 533px, (min-width: 900px) 49vw, calc(100vw - 32px)",
-    thumbnails: ["img/mvee-un-frasco-thumb.webp", "img/producto-frente-thumb.webp", "img/mvee-composicion-thumb.webp", "img/producto-tabla-thumb.webp"],
-    images: ["img/mvee-un-frasco-1080.webp", "img/producto-frente.webp", "img/mvee-composicion-1080.webp", "img/producto-tabla.webp"]
+    thumbnails: ["img/mvee-portada-thumb.webp", "img/producto-frente-thumb.webp", "img/mvee-composicion-thumb.webp", "img/producto-tabla-thumb.webp", "img/mvee-foto-real-thumb.webp"],
+    images: ["img/mvee-portada-1080.webp", "img/producto-frente.webp", "img/mvee-composicion-1080.webp", "img/producto-tabla.webp", "img/mvee-foto-real.webp"]
   },
 
   /* Precios del catálogo. compare = el mismo frasco comprado suelto (ahorro real del combo). */
@@ -680,9 +680,11 @@ function showImage(i) {
   current = i;
   const main = $("galleryMain");
   main.querySelectorAll("img,.ph").forEach(n => n.remove());
-  const slide = img(P.images[i], i === 0 ? P.coverAlt : P.name, `Foto ${i + 1} · 1080×1350`);
+  const src = P.images[i];
+  const alt = i === 0 ? P.coverAlt : src.endsWith("mvee-foto-real.webp") ? "Foto real del frasco de Magnesio + Vitamina B6 VEE en mano" : P.name;
+  const slide = img(src, alt, `Foto ${i + 1} · 1080×1350`);
   main.insertAdjacentHTML("afterbegin", i === 0
-    ? slide.replace('loading="lazy"', `width="1080" height="1350" srcset="${P.coverSrcset}" sizes="${P.coverSizes}" fetchpriority="high"`)
+    ? slide.replace('loading="lazy"', `width="1080" height="1440" srcset="${P.coverSrcset}" sizes="${P.coverSizes}" fetchpriority="high"`)
     : slide);
   [...$("thumbs").children].forEach((b, j) => b.setAttribute("aria-current", j === i));
 }
